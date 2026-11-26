@@ -3,10 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Menu</title>
+
+    <title>Becky Kitchen | Admin Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
-    <h1>Admin Menu</h1>
-    <a href="/logout">Logout</a>
+
+<body class="admin-body">
+
+    <div class="admin-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="admin-sidebar">
+
+            <div class="admin-brand">
+                <div class="brand-icon">BK</div>
+                <div>
+                    <h2>Becky Kitchen</h2>
+                    <span>ADMIN PANEL</span>
+                </div>
+            </div>
+
+            <div class="sidebar-label">MAIN MENU</div>
+
+            <nav class="admin-navigation">
+
+                <a href="{{ url_for('menu') }}"
+                   class="admin-nav-link active">
+                    <span>▦</span>
+                    Dashboard
+                </a>
+
+                <a href="{{ url_for('catalog') }}"
+                   class="admin-nav-link">
+                    <span>🍽</span>
+                    View Food Catalog
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+
+                <div class="admin-profile">
+                    <div class="profile-avatar">A</div>
+                    <div>
+                        <strong>{{ session.get('username', 'Admin') }}</strong>
+                        <small>Administrator</small>
+                    </div>
+                </div>
+
+                <a href="{{ url_for('logout') }}"
+                   class="admin-logout">
+                    <span>↪</span>
+                    Logout
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+        <main class="admin-main">
+
+            <!-- TOPBAR -->
+            <header class="admin-topbar">
+
+                <div>
+                    <span class="breadcrumb">Pages / Dashboard</span>
+                    <h1>Admin Dashboard</h1>
+                </div>
+
+                <div class="topbar-right">
+                    <span class="admin-status">
+                        <span class="status-dot"></span>
+                        System Online
+                    </span>
+                </div>
+
+            </header>
+
+
+            <!-- WELCOME SECTION -->
+            <section class="admin-welcome">
+
+                <div>
+                    <span class="welcome-tag">WELCOME BACK</span>
+
+                    <h2>Hello, {{ session.get('username', 'Admin') }}!</h2>
+
+                    <p>
+                        Manage your restaurant, monitor activities
+                        and keep your kitchen running smoothly.
+                    </p>
+                </div>
+
+                <div class="welcome-decoration">🍲</div>
+
+            </section>
+
+
+            <!-- STATISTICS -->
+            <section class="admin-section">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Overview</h2>
+                        <p>Your restaurant management workspace</p>
+                    </div>
+                </div>
+
+                <div class="admin-stats-grid">
+
+                    <div class="admin-stat-card">
+                        <div class="stat-icon green-icon">🍽</div>
+                        <div>
+                            <p>Food Catalog</p>
+                            <h3>Manage Meals</h3>
+                            <span>View available meals</span>
+                        </div>
+                    </div>
+
+                    <div class="admin-stat-card">
+                        <div class="stat-icon orange-icon">🛍</div>
+                        <div>
+                            <p>Restaurant</p>
+                            <h3>Customer View</h3>
+                            <span>Explore your food catalog</span>
+                        </div>
+                    </div>
+
+                    <div class="admin-stat-card">
+                        <div class="stat-icon blue-icon">👤</div>
+                        <div>
+                            <p>Account</p>
+                            <h3>Administrator</h3>
+                            <span>Manage your workspace</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- QUICK ACTIONS -->
+            <section class="admin-section">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Quick Actions</h2>
+                        <p>Shortcuts to your restaurant workspace</p>
+                    </div>
+                </div>
+
+                <div class="admin-actions-grid">
+
+                    <a href="{{ url_for('catalog') }}"
+                       class="admin-action-card">
+
+                        <div class="action-icon">🍛</div>
+
+                        <div>
+                            <h3>View Food Catalog</h3>
+                            <p>See how meals appear to customers.</p>
+                        </div>
+
+                        <span class="action-arrow">→</span>
+
+                    </a>
+
+
+                    <a href="{{ url_for('logout') }}"
+                       class="admin-action-card">
+
+                        <div class="action-icon logout-icon">↪</div>
+
+                        <div>
+                            <h3>Logout</h3>
+                            <p>Securely leave your admin account.</p>
+                        </div>
+
+                        <span class="action-arrow">→</span>
+
+                    </a>
+
+                </div>
+
+            </section>
+
+
+            <!-- FOOTER -->
+            <footer class="admin-footer">
+                <p>© 2026 Becky Kitchen. All rights reserved.</p>
+                <span>Made with care for good food.</span>
+            </footer>
+
+        </main>
+
+    </div>
+
 </body>
 </html>

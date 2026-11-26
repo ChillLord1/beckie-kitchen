@@ -1,12 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>catalog</title>
-</head>
-<body>
-    <h1>Catalog</h1>
-    <a href="/customer/menu">Back to Menu</a>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Food Catalog - Becky Kitchen{% endblock %}
+
+{% block content %}
+
+    <!-- <nav>
+        <ul>
+            <li><a href="/customer/catalog">Becky Kitchen</a></li>
+            <li><a href="/customer/catalog">Catalog</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav> -->
+
+    <div class="catalog-container">
+
+        <div class="catalog-header">
+            <div>
+                <h1>Welcome to Becky Kitchen</h1>
+                <p>Discover delicious meals made with love.</p>
+            </div>
+        </div>
+
+        <h2>Our Menu</h2>
+
+        <div class="catalog-grid">
+
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600"
+                     alt="Fresh food bowl">
+                <div class="food-card-content">
+                    <h3>Fresh Food Bowl</h3>
+                    <p>Fresh and delicious meals prepared for you.</p>
+                    <span class="food-price">Explore Menu</span>
+                </div>
+            </div>
+
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600"
+                     alt="Delicious pizza">
+                <div class="food-card-content">
+                    <h3>Delicious Pizza</h3>
+                    <p>Enjoy delicious meals made with fresh ingredients.</p>
+                    <span class="food-price">Explore Menu</span>
+                </div>
+            </div>
+
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600"
+                     alt="Healthy meal">
+                <div class="food-card-content">
+                    <h3>Healthy Meals</h3>
+                    <p>Enjoy tasty and nutritious meals every day.</p>
+                    <span class="food-price">Explore Menu</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

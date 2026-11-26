@@ -4,6 +4,7 @@ from flask_migrate import Migrate
 from werkzeug.security import check_password_hash, generate_password_hash
 from config import config_by_name
 from models import User, db
+from decorator import role_required
 
 
 migrate = Migrate()
@@ -23,11 +24,29 @@ app = create_app(os.environ.get('.env', 'dev'))
 def index():
     if 'user_id' in session:
         if session.get('role') == 'admin':
-            return redirect(url_for('admin.menu'))
-        return redirect(url_for('customer.catalog'))
+            return redirect(url_for('menu'))
+        return redirect(url_for('catalog'))
     return redirect(url_for('login'))
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form.get('username', '').strip()
+        password = request.form.get('password', '')
 
+        user = User.query.filter_by(username=username).first()
+        if user:
+            if check_password_hash(user.password_hash, password):
+                session['user_id'] = user.id
+                session['username'] = user.username
+                session['role'] = user.role
+
+                if user.role == 'ADMIN':
+                    return redirect(url_for('menu'))
+
+                return redirect(url_for('catalog'))
+            flash('Invalid username or password.', 'error')
+    return render_template('/login.html')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -65,6 +84,23 @@ def register():
 def logout():
     session.clear()
     return redirect(url_for('login'))
+
+@app.route('/catalog')
+@role_required('customer', 'admin')
+def catalog():
+
+    return render_template(
+        '/customer/catalog.html'
+    )
+    
+@app.route('/menu')
+@role_required('admin')
+def menu():
+
+    return render_template(
+        'admin/menu.html'
+    )
+
 
 if __name__ == '__main__':
     app.run(port=5000)
